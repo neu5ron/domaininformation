@@ -10,7 +10,12 @@ alexa_db = AlexaDBConnection.AlexaDB()
 
 class DomainInformation:
     def __init__(self, domain_name):
-        self.domain_name = domain_name.lower().strip()
+        self.domain_name = domain_name
+        if self.domain_name.__class__ is str:
+            self.domain_name = self.domain_name.lower().strip()
+        else:
+            print 'The domain should be input as a string.\n'
+            raise ValueError
 
     def level_domain_info(self):
         """level_domain_info( ) = Get the length and level of each domain/http host split by level(ie:'.').
