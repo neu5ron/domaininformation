@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 from . import AlexaDBConnection
 import re
 
@@ -11,10 +12,11 @@ alexa_db = AlexaDBConnection.AlexaDB()
 class DomainInformation:
     def __init__(self, domain_name):
         self.domain_name = domain_name
-        if self.domain_name.__class__ is str:
-            self.domain_name = self.domain_name.lower().strip()
-        else:
-            print 'The domain should be input as a string.\n'
+        try:
+            self.domain_name = self.domain_name.lower().strip().encode('ascii')
+        except ( UnicodeEncodeError, ValueError) as error:
+            print error
+            print '%s is not valid. It should be input as an ascii string.\n'%self.domain_name.encode('utf8','replace')
             raise ValueError
 
     def level_domain_info(self):
