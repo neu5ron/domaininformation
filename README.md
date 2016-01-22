@@ -61,6 +61,7 @@ Level Domain Information
                       '3_length': 3,
                       'any': ['com', 'google', 'www'],
                       'any_length': [3, 6, 3],
+                      'total': 3,
                       'total_length': 12}}
     >>> DomainInformation(domain_name='NotADomain').level_domain_info()
     "notadomain" Is not a domain
@@ -80,6 +81,7 @@ All Information / Put everything together
                       '3_length': 3,
                       'any': ['com', 'google', 'www'],
                       'any_length': [3, 6, 3],
+                      'total': 3,
                       'total_length': 12}}
     >>> DomainInformation(domain_name='NotADomain').all()
     "notadomain" Is not a domain

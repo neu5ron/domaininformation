@@ -31,6 +31,7 @@ class DomainInformation:
                           '3_length': 3,
                           'any': ['com', 'google', 'www'],
                           'any_length': [3, 6, 3],
+                          'total': 2,
                           'total_length': 12}}
         >>> DomainInformation(domain_name='NotADomain').level_domain_info()
         "notadomain" Is not a domain
@@ -38,6 +39,7 @@ class DomainInformation:
         """
         if self.is_domain():
             domain_split = self.domain_name.split('.')
+            total = len(domain_split)
             total_length = len(self.domain_name.replace('.',''))
             ld_information = { 'level_domain': { } }
 
@@ -54,6 +56,7 @@ class DomainInformation:
             ld_information['level_domain'].update( { 'any': any_ld } )
             ld_information['level_domain'].update( { 'any_length': any_ld_length} )
             ld_information['level_domain'].update( { 'total_length': total_length } )
+            ld_information['level_domain'].update( { 'total': total } )
             return ld_information
         else:
             return { 'level_domain': None }
@@ -111,6 +114,7 @@ class DomainInformation:
                           '3_length': 3,
                           'any': ['com', 'google', 'www'],
                           'any_length': [3, 6, 3],
+                          'total': 2,
                           'total_length': 12}}
         >>> DomainInformation(domain_name='NotADomain').all()
         "notadomain" Is not a domain
