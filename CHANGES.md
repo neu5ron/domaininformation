@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.5 (2016-01-21)
+-------------------
+-Added pprint to examples
+
 1.0.4 (2016-01-21)
 -------------------
 -Return unique any level domain and any_length domain

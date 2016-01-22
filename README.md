@@ -32,9 +32,9 @@ Valid Domain
 ---------
 	is_domain( ) = Return true if valid domain return false if invalid domain.
     >>> from domaininformation import DomainInformation
-    >>> DomainInformation(domain_name='google.com').is_ip()
+    >>> print DomainInformation(domain_name='google.com').is_ip()
         True
-    >>> DomainInformation(domain_name='NotADomain').is_ip()
+    >>> print DomainInformation(domain_name='NotADomain').is_ip()
         False
 
 Alexa Rank
@@ -42,9 +42,9 @@ Alexa Rank
 	get_alexa_rank( ) = Get the alexa rank of the first and second level domain (ie: google.com)
     Rank will be based on the max of the sixth level domain.
     >>> from domaininformation import DomainInformation
-    >>> DomainInformation(domain_name='www.google.com').get_alexa_rank()
+    >>> print DomainInformation(domain_name='www.google.com').get_alexa_rank()
         {'alexa_rank': 1}
-    >>> DomainInformation(domain_name='NotADomain').get_alexa_rank()
+    >>> print DomainInformation(domain_name='NotADomain').get_alexa_rank()
         "notadomain" Is not a domain
         {'alexa_rank': None}
 
@@ -52,7 +52,8 @@ Level Domain Information
 -------------------
 	level_domain_info( ) = Get the length and level of each domain/http host split by level(ie:'.').
     >>> from domaininformation import DomainInformation
-    >>> DomainInformation(domain_name='www.google.com').level_domain_info()
+    >>> from pprint import pprint
+    >>> pprint( DomainInformation(domain_name='www.google.com').level_domain_info() )
     {'level_domain': {'1': 'com',
                       '1_length': 3,
                       '2': 'google',
@@ -63,7 +64,7 @@ Level Domain Information
                       'any_length': [3, 6, 3],
                       'total': 3,
                       'total_length': 12}}
-    >>> DomainInformation(domain_name='NotADomain').level_domain_info()
+    >>> pprint( DomainInformation(domain_name='NotADomain').level_domain_info() )
     "notadomain" Is not a domain
     {'level_domain': None}
 
@@ -71,7 +72,8 @@ All Information / Put everything together
 ---------------
 	all( ) = put everything together.
     >>> from domaininformation import DomainInformation
-    >>> DomainInformation(domain_name='www.google.com').all()
+    >>> from pprint import pprint
+    >>> pprint( DomainInformation(domain_name='www.google.com').all() )
     {'alexa_rank': 1,
      'level_domain': {'1': 'com',
                       '1_length': 3,
@@ -83,6 +85,6 @@ All Information / Put everything together
                       'any_length': [3, 6, 3],
                       'total': 3,
                       'total_length': 12}}
-    >>> DomainInformation(domain_name='NotADomain').all()
+    >>> pprint( DomainInformation(domain_name='NotADomain').all() )
     "notadomain" Is not a domain
     {'alexa_rank': None, 'level_domain': None}
