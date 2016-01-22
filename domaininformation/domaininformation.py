@@ -53,8 +53,8 @@ class DomainInformation:
                 any_ld.append(ld_value)
                 any_ld_length.append(ld_length)
 
-            ld_information['level_domain'].update( { 'any': any_ld } )
-            ld_information['level_domain'].update( { 'any_length': any_ld_length} )
+            ld_information['level_domain'].update( { 'any': list(set(any_ld)) } )
+            ld_information['level_domain'].update( { 'any_length': list(set(any_ld_length)) } )
             ld_information['level_domain'].update( { 'total_length': total_length } )
             ld_information['level_domain'].update( { 'total': total } )
             return ld_information

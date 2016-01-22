@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.4 (2016-01-21)
+-------------------
+-Return unique any level domain and any_length domain
+
 1.0.3 (2016-01-21)
 -------------------
 -Added total levels of domain
