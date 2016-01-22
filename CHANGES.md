@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.6 (2016-01-21)
+-------------------
+-Fixed home directory for windows or linux
+
 1.0.5 (2016-01-21)
 -------------------
 -Added pprint to examples
