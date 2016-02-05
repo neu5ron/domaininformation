@@ -4,7 +4,7 @@ import re
 
 ######## Regular Expressions
 # Regex to verify a valid domain. Uses most of the RFC, although still allows things not necessarily in the the RFC like two or more -- ie: google--analytics.com (which is malicious) and allows for IDN domain names.
-valid_domain_name_regex = re.compile('^(([\da-zA-Z])([\w-]{,62})\.){,250}([\da-zA-Z])[\w-]{,61}([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))$', re.IGNORECASE)
+valid_domain_name_regex = re.compile('^(([\da-zA-Z])([\w-]{,62})\.){,127}([\da-zA-Z])[\w-]{,61}([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))$', re.IGNORECASE)
 
 ######## Call and Use Databases
 alexa_db = AlexaDBConnection.AlexaDB()
@@ -12,12 +12,18 @@ alexa_db = AlexaDBConnection.AlexaDB()
 class DomainInformation:
     def __init__(self, domain_name):
         self.domain_name = domain_name
+
         try:
             self.domain_name = self.domain_name.lower().strip().encode('ascii')
+            valid_encoding = True
+
         except ( UnicodeEncodeError, ValueError) as error:
+            valid_encoding = False
             print error
             print '%s is not valid. It should be input as an ascii string.\n'%self.domain_name.encode('utf8','replace')
-            raise ValueError
+
+        finally:
+            self.valid_encoding = valid_encoding
 
     def level_domain_info(self):
         """level_domain_info( ) = Get the length and level of each domain/http host split by level(ie:'.').
@@ -46,6 +52,7 @@ class DomainInformation:
 
             any_ld = list()
             any_ld_length = list()
+
             for ld_number, ld_value in enumerate(reversed(domain_split)):
                 ld_number+=1
                 ld_length = len(ld_value)
@@ -59,6 +66,7 @@ class DomainInformation:
             ld_information['level_domain'].update( { 'total_length': total_length } )
             ld_information['level_domain'].update( { 'total': total } )
             return ld_information
+
         else:
             return { 'level_domain': None }
 
@@ -75,16 +83,21 @@ class DomainInformation:
         if self.is_domain():
             level_domain = self.domain_name.split('.')[-6:]
             level_domain_length = len(level_domain)
+
             if level_domain_length >= 2:
+
                 for n in range(level_domain_length-1):
                     domain = '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] )
                     alexa_rank = alexa_db.get(domain)
+
                     if alexa_rank:
                         return {'alexa_rank': alexa_rank }
                 return {'alexa_rank': alexa_rank }
+
             else:
                 print 'Domain does not have a first and second level, and therefore can not get the alexa rank.\n'
                 return {'alexa_rank': None }
+
         else:
             return { 'alexa_rank': None }
 
@@ -96,11 +109,13 @@ class DomainInformation:
         >>> print DomainInformation(domain_name='NotADomain').is_ip()
             False
         """
-        if re.match(valid_domain_name_regex, self.domain_name ):
-            return True
-        else:
-            print '"%s" Is not a domain'%self.domain_name
-            return False
+        if self.valid_encoding:
+
+            if re.match(valid_domain_name_regex, self.domain_name ):
+                return True
+
+        print '"%s" Is not a domain'%self.domain_name
+        return False
 
     def all(self):
         """all( ) = put everything together.
@@ -123,10 +138,12 @@ class DomainInformation:
         {'alexa_rank': None, 'level_domain': None}
         """
         data = dict()
+
         if self.is_domain():
             data.update(self.level_domain_info())
             data.update(self.get_alexa_rank())
             return data
+
         else:
             data.update({ 'level_domain': None })
             data.update({ 'alexa_rank': None })

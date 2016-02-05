@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.7 (2016-02-05)
+-------------------
+-Changed stuff probably for no reason
+
 1.0.6 (2016-01-21)
 -------------------
 -Fixed home directory for windows or linux
