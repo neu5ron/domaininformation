@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.8 (2016-02-05)
+-------------------
+-Fixed valid domain regex...
+
 1.0.7 (2016-02-05)
 -------------------
 -Changed stuff probably for no reason

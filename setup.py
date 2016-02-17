@@ -3,7 +3,7 @@ import sys
 import io
 
 NAME = 'domaininformation'
-VERSION = '1.0.7'
+VERSION = '1.0.8'
 AUTHOR = 'neu5ron'
 AUTHOR_EMAIL = 'therealneu5ron AT gmail DOT com'
 DESCRIPTION = "Combine information about a domain in JSON format"

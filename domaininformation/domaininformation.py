@@ -4,7 +4,7 @@ import re
 
 ######## Regular Expressions
 # Regex to verify a valid domain. Uses most of the RFC, although still allows things not necessarily in the the RFC like two or more -- ie: google--analytics.com (which is malicious) and allows for IDN domain names.
-valid_domain_name_regex = re.compile('^(([\da-zA-Z])([\w-]{,62})\.){,127}([\da-zA-Z])[\w-]{,61}([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))$', re.IGNORECASE)
+valid_domain_name_regex = re.compile('(([\da-zA-Z])([\w-]{,62})\.){,127}(([\da-zA-Z])[\w-]{,61})?([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))', re.IGNORECASE)
 
 ######## Call and Use Databases
 alexa_db = AlexaDBConnection.AlexaDB()
