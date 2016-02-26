@@ -32,9 +32,9 @@ Valid Domain
 ---------
 	is_domain( ) = Return true if valid domain return false if invalid domain.
     >>> from domaininformation import DomainInformation
-    >>> print DomainInformation(domain_name='google.com').is_ip()
+    >>> print DomainInformation(domain_name='google.com').is_domain()
         True
-    >>> print DomainInformation(domain_name='NotADomain').is_ip()
+    >>> print DomainInformation(domain_name='NotADomain').is_domain()
         False
 
 Alexa Rank
