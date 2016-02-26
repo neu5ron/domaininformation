@@ -3,6 +3,7 @@ Changelog
 1.0.9 (2016-02-05)
 -------------------
 -Decreased download rate of Alexa DB
+-Code cleanup
 
 1.0.8 (2016-02-05)
 -------------------

@@ -15,15 +15,12 @@ class DomainInformation:
 
         try:
             self.domain_name = self.domain_name.lower().strip().encode('ascii')
-            valid_encoding = True
+            self.valid_encoding = True
 
         except ( UnicodeEncodeError, ValueError) as error:
-            valid_encoding = False
+            self.valid_encoding = False
             print error
             print '%s is not valid. It should be input as an ascii string.\n'%self.domain_name.encode('utf8','replace')
-
-        finally:
-            self.valid_encoding = valid_encoding
 
     def level_domain_info(self):
         """level_domain_info( ) = Get the length and level of each domain/http host split by level(ie:'.').
@@ -96,7 +93,9 @@ class DomainInformation:
 
                     if alexa_rank:
                         return {'alexa_rank': alexa_rank }
-                return {'alexa_rank': alexa_rank }
+
+                    else:
+                        return {'alexa_rank': None }
 
             else:
                 print 'Domain does not have a first and second level, and therefore can not get the alexa rank.\n'
@@ -108,9 +107,9 @@ class DomainInformation:
     def is_domain(self):
         """is_domain( ) = Return true if valid domain return false if invalid domain.
         >>> from domaininformation import DomainInformation
-        >>> print DomainInformation(domain_name='google.com').is_ip()
+        >>> print DomainInformation(domain_name='google.com').is_domain()
             True
-        >>> print DomainInformation(domain_name='NotADomain').is_ip()
+        >>> print DomainInformation(domain_name='NotADomain').is_domain()
             False
         """
         if self.valid_encoding:
