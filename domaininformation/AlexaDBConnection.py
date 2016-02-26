@@ -9,7 +9,7 @@ from dateutil import parser
 
 ######################################## # Edit If Need Be
 base_directory = os.path.expanduser("~") #Directory where 'alexa' folder will be created (currently home directory)
-hours_to_pull_new_geoip_db = 48 #Use this variable in hours to determine how often to download and update the local databases
+hours_to_pull_new_geoip_db = 120 #Use this variable in hours to determine how often to download and update the local databases
 ########################################
 
 alexa_directory = os.path.join( base_directory, 'alexa' )

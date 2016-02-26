@@ -71,8 +71,12 @@ class DomainInformation:
             return { 'level_domain': None }
 
     def get_alexa_rank(self):
-        """get_alexa_rank( ) = Get the alexa rank of the first and second level domain (ie: google.com)
-        Rank will be based on the max of the sixth level domain.
+        """
+        Get the alexa rank of the first and second level domain (ie: google.com)
+
+        Returns:
+            Dictionary: {'alexa_rank': Int(AlexaRank)}
+
         >>> from domaininformation import DomainInformation
         >>> print DomainInformation(domain_name='www.google.com').get_alexa_rank()
             {'alexa_rank': 1}
