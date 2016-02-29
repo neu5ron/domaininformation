@@ -4,7 +4,7 @@ import os, sys
 import csv
 from StringIO import StringIO
 from zipfile import ZipFile
-import urllib2
+import requests
 from dateutil import parser
 
 ######################################## # Edit If Need Be
@@ -70,9 +70,9 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
         print 'Alexa file needs to be updated or does not exist!\nTrying to download it to %s/%s\n'%( alexa_directory, filename )
 
         try:
-            url = urllib2.urlopen(download_url)
+            response = requests.get( download_url, timeout=(10,2) )
 
-            with open( os.path.join( alexa_directory, filename ), 'wb' ) as downloaded_file, open(file_last_downloaded, 'w') as lastdownloadf, ZipFile(StringIO(url.read()), 'r') as zipfile:
+            with open( os.path.join( alexa_directory, filename ), 'wb' ) as downloaded_file, open(file_last_downloaded, 'w') as lastdownloadf, ZipFile(StringIO(response.content), 'r') as zipfile:
                 downloaded_file.write(zipfile.open(filename).read())
                 lastdownloadf.write(str(current_time))
                 zipfile.close()
@@ -81,13 +81,25 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
             print 'Could not download and write Alexa database due to %s.\n'%error
             sys.exit(1)
 
-        except urllib2.HTTPError as error:
+        except requests.HTTPError as error:
             print 'Could not download and write Alexa database due to %s.\n'%error
             sys.exit(1)
 
-        except urllib2.URLError as error:
+        except requests.Timeout as error:
             print 'Could not download and write Alexa database due to %s.\n'%error
             sys.exit(1)
+
+        except requests.ConnectionError as error:
+            print 'Could not download and write Alexa database due to %s.\n'%error
+            sys.exit(1)
+
+        except requests.TooManyRedirects as error:
+            print 'Could not download and write Alexa database due to %s.\n'%error
+            sys.exit(1)
+
+        except requests.URLRequired as error:
+            print 'Could not download and write Alexa database due to %s.\n'%error
+            return False
 
     #Set Alexa database
     alexa_db = dict()

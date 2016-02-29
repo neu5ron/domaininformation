@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.10 (2016-02-05)
+-------------------
+-Download error checking and switched to requests
+
 1.0.9 (2016-02-05)
 -------------------
 -Decreased download rate of Alexa DB
