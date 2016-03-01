@@ -1,6 +1,6 @@
 Changelog
 =========
-1.0.11 (2016-02-05)
+1.0.12 (2016-02-05)
 -------------------
 -Alexa rank was not being parsed to lowest common denominator and was returning right away if it did not have a rank.
 

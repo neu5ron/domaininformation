@@ -89,8 +89,6 @@ class DomainInformation:
 
                 for n in range(level_domain_length-1):
                     domain = '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] )
-                    print n
-                    print domain
                     alexa_rank = alexa_db.get(domain)
 
                     if alexa_rank:
