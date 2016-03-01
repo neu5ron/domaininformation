@@ -89,13 +89,14 @@ class DomainInformation:
 
                 for n in range(level_domain_length-1):
                     domain = '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] )
+                    print n
+                    print domain
                     alexa_rank = alexa_db.get(domain)
 
                     if alexa_rank:
                         return {'alexa_rank': alexa_rank }
 
-                    else:
-                        return {'alexa_rank': None }
+                return {'alexa_rank': None }
 
             else:
                 print 'Domain does not have a first and second level, and therefore can not get the alexa rank.\n'
