@@ -1,6 +1,7 @@
 #!/usr/bin/env python2.7
 from . import AlexaDBConnection
 import re
+from AlexaDBConnection import logging_file
 
 ######## Regular Expressions
 # Regex to verify a valid domain. Uses most of the RFC, although still allows things not necessarily in the the RFC like two or more -- ie: google--analytics.com (which is malicious) and allows for IDN domain names.
@@ -12,15 +13,14 @@ alexa_db = AlexaDBConnection.AlexaDB()
 class DomainInformation:
     def __init__(self, domain_name):
         self.domain_name = domain_name
-
         try:
             self.domain_name = self.domain_name.lower().strip().encode('ascii')
             self.valid_encoding = True
 
         except ( UnicodeEncodeError, ValueError) as error:
             self.valid_encoding = False
-            print error
-            print '%s is not valid. It should be input as an ascii string.\n'%self.domain_name.encode('utf8','replace')
+            print u'{0} is not valid. It should be input as an ascii string.'.format( unicode(self.domain_name) )
+            logging_file.error( u'{0} is not valid. It should be input as an ascii string.'.format( unicode(self.domain_name) ) )
 
     def level_domain_info(self):
         """level_domain_info( ) = Get the length and level of each domain/http host split by level(ie:'.').
@@ -116,7 +116,7 @@ class DomainInformation:
             if re.match(valid_domain_name_regex, self.domain_name ):
                 return True
 
-        print '"%s" Is not a domain'%self.domain_name
+        print u'{0} is not a domain.'.format( unicode(self.domain_name) )
         return False
 
     def all(self):

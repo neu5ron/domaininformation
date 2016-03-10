@@ -1,19 +1,27 @@
 Changelog
 =========
-1.0.12 (2016-02-05)
+1.0.13 (2016-03-10)
+-------------------
+-Adding logging and removed some prints
+
+1.0.12 (2016-02-29)
 -------------------
 -Alexa rank was not being parsed to lowest common denominator and was returning right away if it did not have a rank.
 
-1.0.10 (2016-02-05)
+1.0.11 (2016-02-29)
+-------------------
+-Fixed 1.0.10
+
+1.0.10 (2016-02-29)
 -------------------
 -Download error checking and switched to requests
 
-1.0.9 (2016-02-05)
+1.0.9 (2016-02-26)
 -------------------
 -Decreased download rate of Alexa DB
 -Code cleanup
 
-1.0.8 (2016-02-05)
+1.0.8 (2016-02-17)
 -------------------
 -Fixed valid domain regex...
 
