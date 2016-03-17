@@ -142,7 +142,7 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
             # if a == 100001:#TODO:Eventually allow choice of how many of the alexa top million to grab
             #     break
             # else:
-            # alexa_db.setdefault( row[1], int(row[0]) )
+                # alexa_db.setdefault( row[1], int(row[0]) )
 
     alexacsvfile.close()
 
