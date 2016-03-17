@@ -12,7 +12,6 @@ from logging import handlers
 ######################################## # Edit If Need Be
 base_directory = os.path.expanduser("~") # Directory where 'alexa' folder will be created (currently home directory)
 hours_to_pull_new_geoip_db = 120 # Use this variable in hours to determine how often to download and update the local databases
-log_directory = os.path.realpath('.') # Log directory for errors and such from where the script is called
 ########################################
 
 # Set logging
@@ -140,6 +139,10 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
 
         for row in alexa_file:
             alexa_db.setdefault( row[1], int(row[0]) )
+            # if a == 100001:#TODO:Eventually allow choice of how many of the alexa top million to grab
+            #     break
+            # else:
+            # alexa_db.setdefault( row[1], int(row[0]) )
 
     alexacsvfile.close()
 

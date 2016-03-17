@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.14 (2016-03-14)
+-------------------
+-Cleanup
+
 1.0.13 (2016-03-10)
 -------------------
 -Adding logging and removed some prints

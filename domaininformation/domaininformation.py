@@ -3,15 +3,18 @@ from . import AlexaDBConnection
 import re
 from AlexaDBConnection import logging_file
 
-######## Regular Expressions
 # Regex to verify a valid domain. Uses most of the RFC, although still allows things not necessarily in the the RFC like two or more -- ie: google--analytics.com (which is malicious) and allows for IDN domain names.
 valid_domain_name_regex = re.compile('(([\da-zA-Z])([\w-]{,62})\.){,127}(([\da-zA-Z])[\w-]{,61})?([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))', re.IGNORECASE)
 
-######## Call and Use Databases
+# Call and Use Alexa DB
 alexa_db = AlexaDBConnection.AlexaDB()
 
 class DomainInformation:
     def __init__(self, domain_name):
+        """
+        :param domain_name: The Domain name to gather information for
+        :return:
+        """
         self.domain_name = domain_name
         try:
             self.domain_name = self.domain_name.lower().strip().encode('ascii')
@@ -23,7 +26,8 @@ class DomainInformation:
             logging_file.error( u'{0} is not valid. It should be input as an ascii string.'.format( unicode(self.domain_name) ) )
 
     def level_domain_info(self):
-        """level_domain_info( ) = Get the length and level of each domain/http host split by level(ie:'.').
+        """
+        Get the length and level of each domain/http host split by level(ie:'.').
         >>> from domaininformation import DomainInformation
         >>> from pprint import pprint
         >>> pprint( DomainInformation(domain_name='www.google.com').level_domain_info() )
@@ -104,7 +108,8 @@ class DomainInformation:
             return { 'alexa_rank': None }
 
     def is_domain(self):
-        """is_domain( ) = Return true if valid domain return false if invalid domain.
+        """
+        Return true if valid domain return false if invalid domain.
         >>> from domaininformation import DomainInformation
         >>> print DomainInformation(domain_name='google.com').is_domain()
             True
@@ -116,11 +121,13 @@ class DomainInformation:
             if re.match(valid_domain_name_regex, self.domain_name ):
                 return True
 
-        print u'{0} is not a domain.'.format( unicode(self.domain_name) )
+        # print u'{0} is not a domain.'.format( unicode(self.domain_name) )
+        logging_file.warn( u'"{0}" is not a domain.'.format( unicode(self.domain_name) ) )
         return False
 
     def all(self):
-        """all( ) = put everything together.
+        """
+        Put everything together.
         >>> from domaininformation import DomainInformation
         >>> from pprint import pprint
         >>> pprint( DomainInformation(domain_name='www.google.com').all() )
