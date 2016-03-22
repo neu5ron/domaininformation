@@ -32,11 +32,11 @@ class DomainInformation:
         >>> from pprint import pprint
         >>> pprint( DomainInformation(domain_name='www.google.com').level_domain_info() )
         {'level_domain': {'1': 'com',
-                          '1_length': 3,
+                          'length_1': 3,
                           '2': 'google',
-                          '2_length': 6,
+                          'length_2': 6,
                           '3': 'www',
-                          '3_length': 3,
+                          'length_3': 3,
                           'any': ['com', 'google', 'www'],
                           'any_length': [3, 6, 3],
                           'total': 2,
@@ -58,7 +58,7 @@ class DomainInformation:
                 ld_number+=1
                 ld_length = len(ld_value)
                 ld_information['level_domain'].update( { '%s'%ld_number: ld_value } )
-                ld_information['level_domain'].update( { '%s_length'%ld_number: ld_length } )
+                ld_information['level_domain'].update( { 'length_%s'%ld_number: ld_length } )
                 any_ld.append(ld_value)
                 any_ld_length.append(ld_length)
 
@@ -133,11 +133,11 @@ class DomainInformation:
         >>> pprint( DomainInformation(domain_name='www.google.com').all() )
         {'alexa_rank': 1,
          'level_domain': {'1': 'com',
-                          '1_length': 3,
+                          'length_1': 3,
                           '2': 'google',
-                          '2_length': 6,
+                          'length_2': 6,
                           '3': 'www',
-                          '3_length': 3,
+                          'length_3': 3,
                           'any': ['com', 'google', 'www'],
                           'any_length': [3, 6, 3],
                           'total': 2,

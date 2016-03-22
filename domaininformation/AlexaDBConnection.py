@@ -34,8 +34,7 @@ if not os.path.exists(alexa_directory):
         os.mkdir(alexa_directory)
 
     except OSError as error:
-        # print 'Failed to create %s'%alexa_directory
-        # print '%s'%error
+        print 'Failed to create {0}. Due to:\n{1}'.format( alexa_directory, error )
         logging_file.error( 'Failed to create {0}. Due to:\n{1}'.format( alexa_directory, error ) )
         sys.exit(1)
 
@@ -78,7 +77,7 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
                     lastdlf.write(str(current_time))
 
         except IOError as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             sys.exit(1)
 
@@ -86,7 +85,7 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
         need_to_download = True
 
     if need_to_download:
-        # print 'Alexa file needs to be updated or does not exist!\nTrying to download it to %s/%s\n'%( alexa_directory, filename )
+        print 'Alexa file needs to be updated or does not exist!\nTrying to download it to %s/%s\n'%( alexa_directory, filename )
         logging_file.info( 'Alexa file needs to be updated or does not exist! Trying to download it to "{0}/{1}"'.format( alexa_directory, filename ) )
 
         try:
@@ -102,32 +101,32 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
 
 
         except IOError as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             sys.exit(1)
 
         except requests.HTTPError as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             sys.exit(1)
 
         except requests.Timeout as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             sys.exit(1)
 
         except requests.ConnectionError as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             sys.exit(1)
 
         except requests.TooManyRedirects as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             sys.exit(1)
 
         except requests.URLRequired as error:
-            # print 'Could not download and write Alexa database due to %s.\n'%error
+            print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
             return False
 

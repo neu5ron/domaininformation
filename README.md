@@ -55,14 +55,14 @@ Level Domain Information
     >>> from pprint import pprint
     >>> pprint( DomainInformation(domain_name='www.google.com').level_domain_info() )
     {'level_domain': {'1': 'com',
-                      '1_length': 3,
+                      'length_1': 3,
                       '2': 'google',
-                      '2_length': 6,
+                      'length_2': 6,
                       '3': 'www',
-                      '3_length': 3,
+                      'length_3': 3,
                       'any': ['com', 'google', 'www'],
                       'any_length': [3, 6, 3],
-                      'total': 3,
+                      'total': 2,
                       'total_length': 12}}
     >>> pprint( DomainInformation(domain_name='NotADomain').level_domain_info() )
     "notadomain" Is not a domain
@@ -76,14 +76,14 @@ All Information / Put everything together
     >>> pprint( DomainInformation(domain_name='www.google.com').all() )
     {'alexa_rank': 1,
      'level_domain': {'1': 'com',
-                      '1_length': 3,
+                      'length_1': 3,
                       '2': 'google',
-                      '2_length': 6,
+                      'length_2': 6,
                       '3': 'www',
-                      '3_length': 3,
+                      'length_3': 3,
                       'any': ['com', 'google', 'www'],
                       'any_length': [3, 6, 3],
-                      'total': 3,
+                      'total': 2,
                       'total_length': 12}}
     >>> pprint( DomainInformation(domain_name='NotADomain').all() )
     "notadomain" Is not a domain

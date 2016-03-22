@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.15 (2016-03-22)
+-------------------
+-Changed naming of level domain length
+
 1.0.14 (2016-03-14)
 -------------------
 -Cleanup
