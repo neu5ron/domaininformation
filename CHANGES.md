@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.16 (2016-03-22)
+-------------------
+-Added EoL to domain
+
 1.0.15 (2016-03-22)
 -------------------
 -Changed naming of level domain length

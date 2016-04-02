@@ -4,7 +4,9 @@ import re
 from AlexaDBConnection import logging_file
 
 # Regex to verify a valid domain. Uses most of the RFC, although still allows things not necessarily in the the RFC like two or more -- ie: google--analytics.com (which is malicious) and allows for IDN domain names.
-valid_domain_name_regex = re.compile('(([\da-zA-Z])([\w-]{,62})\.){,127}(([\da-zA-Z])[\w-]{,61})?([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))', re.IGNORECASE)
+domain_regex = r'(([\da-zA-Z])([\w-]{,62})\.){,127}(([\da-zA-Z])[\w-]{,61})?([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z]{2,})))'
+domain_regex = '{0}$'.format(domain_regex)
+valid_domain_name_regex = re.compile(domain_regex, re.IGNORECASE)
 
 # Call and Use Alexa DB
 alexa_db = AlexaDBConnection.AlexaDB()
