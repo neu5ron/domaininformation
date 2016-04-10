@@ -15,7 +15,7 @@ hours_to_pull_new_geoip_db = 120 # Use this variable in hours to determine how o
 ########################################
 
 # Set logging
-log_file = os.path.join ( os.path.realpath( os.path.join( __file__, '..' ) ), 'domaininformation.log' )
+log_file = os.path.join ( '/tmp', 'domaininformation.log' )
 logging_file = logging.getLogger(__name__)
 logging_file.setLevel(logging.DEBUG)
 logging_file_handler = handlers.RotatingFileHandler( log_file, maxBytes=5, backupCount=0  )
