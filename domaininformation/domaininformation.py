@@ -111,7 +111,7 @@ class DomainInformation:
                 for ranking in alexa_db:
                     for domain in domains:
                         if domain == ranking[1]:
-                            alexa_rank['alexa_rank'] = ranking[0]
+                            alexa_rank['alexa_rank'] = int(ranking[0])
             else:
                 print 'Domain does not have a first and second level, and therefore can not get the alexa rank.\n'
 

@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.19 (2016-07-06)
+-------------------
+-Returning str and not int for alexa rank
+
 1.0.18 (2016-07-06)
 -------------------
 -Don't load Alexa DB into memory and instead use iter
