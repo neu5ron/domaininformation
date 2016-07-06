@@ -8,8 +8,9 @@ domain_regex = r'(([\da-zA-Z])([\w-]{,62})\.){,127}(([\da-zA-Z])[\w-]{,61})?([\d
 domain_regex = '{0}$'.format(domain_regex)
 valid_domain_name_regex = re.compile(domain_regex, re.IGNORECASE)
 
-# Call and Use Alexa DB
-alexa_db = AlexaDBConnection.AlexaDB()
+# Download and call Alexa DB
+AlexaDBConnection.DownloadAlexaDB()
+alexa_db = AlexaDBConnection.GetAlexaDB()
 
 class DomainInformation:
     def __init__(self, domain_name):
@@ -22,7 +23,7 @@ class DomainInformation:
             self.domain_name = self.domain_name.lower().strip().encode('ascii')
             self.valid_encoding = True
 
-        except ( UnicodeEncodeError, ValueError) as error:
+        except ( UnicodeEncodeError, ValueError, AttributeError) as error:
             self.valid_encoding = False
             print u'{0} is not valid. It should be input as an ascii string.'.format( unicode(self.domain_name) )
             logging_file.error( u'{0} is not valid. It should be input as an ascii string.'.format( unicode(self.domain_name) ) )
@@ -75,7 +76,9 @@ class DomainInformation:
 
     def get_alexa_rank(self):
         """
-        Get the alexa rank of the first and second level domain (ie: google.com)
+        Get the alexa rank of the first and second level domain (ie: google.com).
+        Rank will be based on the max of the sixth level domain and will iterate all the way down to the first and second level.
+        ie: www.google.com would match google.com in the database.
 
         Returns:
             Dictionary: {'alexa_rank': Int(AlexaRank)}
@@ -87,27 +90,32 @@ class DomainInformation:
             "notadomain" Is not a domain
             {'alexa_rank': None}
         """
+        alexa_rank = {'alexa_rank': None }
+
         if self.is_domain():
             level_domain = self.domain_name.split('.')[-6:]
             level_domain_length = len(level_domain)
 
             if level_domain_length >= 2:
 
-                for n in range(level_domain_length-1):
-                    domain = '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] )
-                    alexa_rank = alexa_db.get(domain)
+                # for n in range(level_domain_length-1):#TODO:Reenable or Delete
+                #     domain = '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] )
+                #     alexa_rank = alexa_db.get(domain)
+                #
+                #     if alexa_rank:
+                #         ret['alexa_rank'] = alexa_rank
+                #         break
 
-                    if alexa_rank:
-                        return {'alexa_rank': alexa_rank }
+                domains = [ '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] ) for n in range(level_domain_length-1) ]
 
-                return {'alexa_rank': None }
-
+                for ranking in alexa_db:
+                    for domain in domains:
+                        if domain == ranking[1]:
+                            alexa_rank['alexa_rank'] = ranking[0]
             else:
                 print 'Domain does not have a first and second level, and therefore can not get the alexa rank.\n'
-                return {'alexa_rank': None }
 
-        else:
-            return { 'alexa_rank': None }
+        return alexa_rank
 
     def is_domain(self):
         """

@@ -11,7 +11,7 @@ from logging import handlers
 
 ######################################## # Edit If Need Be
 base_directory = os.path.expanduser("~") # Directory where 'alexa' folder will be created (currently home directory)
-hours_to_pull_new_geoip_db = 120 # Use this variable in hours to determine how often to download and update the local databases
+hours_to_pull_new_geoip_db = 120#TOOD:Change back # Use this variable in hours to determine how often to download and update the local databases
 ########################################
 
 # Set logging
@@ -25,6 +25,7 @@ logging_file.addHandler(logging_file_handler)
 
 # Create Alexa Directory
 alexa_directory = os.path.join( base_directory, 'alexa' )
+alexa_filename ='top-1m.csv'# Default alexa filename
 
 if not os.path.exists(alexa_directory):
     # print '%s does not exist. Creating it now.'%alexa_directory
@@ -38,10 +39,9 @@ if not os.path.exists(alexa_directory):
         logging_file.error( 'Failed to create {0}. Due to:\n{1}'.format( alexa_directory, error ) )
         sys.exit(1)
 
-
-def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa-static/top-1m.csv.zip' ):
+def DownloadAlexaDB( filename=alexa_filename, download_url='https://s3.amazonaws.com/alexa-static/top-1m.csv.zip' ):
     """
-    Update Or Download information from Alexa Rank and return it for use
+    Update Or Download information from Alexa
     :param filename:
     :param download_url:
     :return:
@@ -128,23 +128,27 @@ def AlexaDB( filename='top-1m.csv', download_url='https://s3.amazonaws.com/alexa
         except requests.URLRequired as error:
             print 'Could not download and write Alexa database due to %s.\n'%error
             logging_file.error( 'Could not download and write Alexa database. Due to:\n{0}'.format( error ) )
-            return False
+            sys.exit(1)
+
+def GetAlexaDB():
+    """
+    Return iter of the alexa db csv
+    :return: iter
+    """
 
     # Set Alexa database
-    alexa_db = dict()
+    # alexa_db = dict()
+    # with open(os.path.join( alexa_directory, alexa_filename ), 'rb') as alexacsvfile:#TODO:Reenable or Delete
+    #     alexa_file = csv.reader( alexacsvfile, delimiter=',' )
+    #     for num, row in enumerate(alexa_file):#TODO:Eventually allow choice of how many of the alexa top million to grab
+    #         if num == 100001:
+    #             break
+    #         else:
+    #             alexa_db.setdefault( row[1], int(row[0]) )
+    # alexacsvfile.close()
+    # return alexa_db
 
-    with open(os.path.join( alexa_directory, filename ), 'rb') as alexacsvfile:
-        alexa_file = csv.reader( alexacsvfile, delimiter=',' )
+    alexacsvfile = open(os.path.join( alexa_directory, alexa_filename ), 'rb')
+    return csv.reader( alexacsvfile, delimiter=','  )
 
-        for row in alexa_file:
-            alexa_db.setdefault( row[1], int(row[0]) )
-        # for num, row in enumerate(alexa_file):#TODO:Eventually allow choice of how many of the alexa top million to grab
-            # if num == 100001:
-            #     break
-            # else:
-                # alexa_db.setdefault( row[1], int(row[0]) )
-
-    alexacsvfile.close()
-
-    return alexa_db
 

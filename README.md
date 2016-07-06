@@ -39,8 +39,9 @@ Valid Domain
 
 Alexa Rank
 -------------
-	get_alexa_rank( ) = Get the alexa rank of the first and second level domain (ie: google.com)
-    Rank will be based on the max of the sixth level domain.
+	get_alexa_rank( ) = Get the alexa rank of the first and second level domain (ie: google.com).
+    Rank will be based on the max of the sixth level domain and will iterate all the way down to the first and second level.
+    ie: www.google.com would match google.com in the database.
     >>> from domaininformation import DomainInformation
     >>> print DomainInformation(domain_name='www.google.com').get_alexa_rank()
         {'alexa_rank': 1}

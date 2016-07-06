@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.18 (2016-07-06)
+-------------------
+-Don't load Alexa DB into memory and instead use iter
+
 1.0.17 (2016-03-22)
 -------------------
 -Log fix
