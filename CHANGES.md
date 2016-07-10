@@ -2,6 +2,10 @@ Changelog
 =========
 1.0.19 (2016-07-06)
 -------------------
+-Fix alexa issue since using iter value if called twice it would not call the DB
+
+1.0.19 (2016-07-06)
+-------------------
 -Returning str and not int for alexa rank
 
 1.0.18 (2016-07-06)

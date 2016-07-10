@@ -89,7 +89,7 @@ def DownloadAlexaDB( filename=alexa_filename, download_url='https://s3.amazonaws
         logging_file.info( 'Alexa file needs to be updated or does not exist! Trying to download it to "{0}/{1}"'.format( alexa_directory, filename ) )
 
         try:
-            response = requests.get( download_url, timeout=(10,2) )
+            response = requests.get( download_url, timeout=(10,5) )
 
             with open( os.path.join( alexa_directory, filename ), 'wb' ) as downloaded_file, open(file_last_downloaded, 'w') as lastdownloadf, ZipFile(StringIO(response.content), 'r') as zipfile:
                 downloaded_file.write(zipfile.open(filename).read())

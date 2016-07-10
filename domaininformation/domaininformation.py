@@ -10,7 +10,6 @@ valid_domain_name_regex = re.compile(domain_regex, re.IGNORECASE)
 
 # Download and call Alexa DB
 AlexaDBConnection.DownloadAlexaDB()
-alexa_db = AlexaDBConnection.GetAlexaDB()
 
 class DomainInformation:
     def __init__(self, domain_name):
@@ -108,7 +107,7 @@ class DomainInformation:
 
                 domains = [ '%s.%s' %('.'.join(level_domain[:-1][n:]), level_domain[-1] ) for n in range(level_domain_length-1) ]
 
-                for ranking in alexa_db:
+                for ranking in AlexaDBConnection.GetAlexaDB():
                     for domain in domains:
                         if domain == ranking[1]:
                             alexa_rank['alexa_rank'] = int(ranking[0])
