@@ -1,6 +1,6 @@
 Changelog
 =========
-1.0.19 (2016-07-06)
+1.0.20 (2016-07-06)
 -------------------
 -Fix alexa issue since using iter value if called twice it would not call the DB
 
