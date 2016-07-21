@@ -131,7 +131,7 @@ class DomainInformation:
                 return True
 
         # print u'{0} is not a domain.'.format( unicode(self.domain_name) )
-        logging_file.warn( u'"{0}" is not a domain.'.format( unicode(self.domain_name) ) )
+        # logging_file.warn( u'"{0}" is not a domain.'.format( unicode(self.domain_name) ) )
         return False
 
     def all(self):

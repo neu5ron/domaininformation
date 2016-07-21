@@ -1,5 +1,9 @@
 Changelog
 =========
+1.0.21 (2016-07-06)
+-------------------
+-Removed logging every none domain
+
 1.0.20 (2016-07-06)
 -------------------
 -Fix alexa issue since using iter value if called twice it would not call the DB
