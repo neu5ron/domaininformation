@@ -105,7 +105,7 @@ Level Domain Information
     
 Detailed Usage Examples
 =======================
-Whitelisting "legitimate" domains using top one million Alexa & OpenDNS. Will exclude anything <= top 1,000 for Alexa and top 2,000 for OpenDNS. Can Change AND/OR or the number <=
+Whitelisting "legitimate" domains using top one million Alexa & OpenDNS. Will exclude anything <= top 1,000 for Alexa and top 2,000 for OpenDNS. Can Change AND/OR or the <= number obviously 
 ---------
     from domaininformation import DomainInformation
     
@@ -144,4 +144,4 @@ Whitelisting "legitimate" domains using top one million Alexa & OpenDNS. Will ex
             else:
                 FilteredDomainList.append(domain)
     
-    print "List of removed high confidence domains:\n",FilteredDomainList
+    print "List that has removed high confidence legitimate domains:\n",FilteredDomainList
