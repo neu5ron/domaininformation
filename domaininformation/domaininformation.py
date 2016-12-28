@@ -39,8 +39,8 @@ class DomainInformation(object):
 
         except DomainInvalidLevels:
             self.IsDomain = False
-            print r'{0} is not valid. It does not have enough levels.'.format(self.domain_name)
-            logging_file.error( r'{0} is not valid. It does not have enough levels.'.format(self.domain_name))
+            print r'{0} is not valid. It does not match the RFC.'.format(self.domain_name)
+            logging_file.error( r'{0} is not valid. It does not match the RFC.'.format(self.domain_name))
 
     @classmethod
     def AlexaDatabase(self, load_in_memory=False, number_to_load_in_memory=1000000):
