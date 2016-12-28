@@ -1,5 +1,14 @@
 Changelog
 =========
+1.0.22 (2016-12-28)
+-------------------
+-Removed "all" function
+-Added ability to load Alexa DB into memory or not
+-Added ability to specify how much of the Alexa DB to load into memory
+-Added OpenDNS top million
+-Added ability to load OpenDNS into memory or not
+-Added ability to specify how much of the OpenDNS DB to load into memory
+
 1.0.21 (2016-07-06)
 -------------------
 -Removed logging every none domain
