@@ -2,6 +2,10 @@ Changelog
 =========
 1.0.23 (2016-12-28)
 -------------------
+-Added digits to first level domain regex
+
+1.0.23 (2016-12-28)
+-------------------
 -Invalid / non matching RFC domain was just saying "invalid levels"
 -Sauced up README.md
 
